@@ -13,12 +13,12 @@ def proccess_image(img_path, output_folder):
     _, thresh = cv.threshold(img, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
 
     kernel = np.ones((5, 5), np.uint8)
-    dilate = cv.dilate(thresh, kernel, iterations=2)
+    opening = cv.morphologyEx(thresh, cv.MORPH_OPEN, kernel)
 
     filename = os.path.basename(img_path)
     output_path = os.path.join(output_folder, filename)
 
-    cv.imwrite(output_path, dilate)
+    cv.imwrite(output_path, opening)
 
 def process_images():
     output_folder = 'output/'

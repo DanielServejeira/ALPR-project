@@ -21,7 +21,7 @@ def morphological_skeleton(image):
     return skel
 
 # Lê a imagem em BGR
-img = cv.imread('./train/6/418.png', cv.IMREAD_GRAYSCALE)
+img = cv.imread('./train/S/808.png', cv.IMREAD_GRAYSCALE)
 
 img = cv.bitwise_not(img)
 
@@ -32,6 +32,6 @@ equalized = cv.equalizeHist(blur)
 ret, thresh = cv.threshold(img,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 
 kernel = np.ones((5,5),np.uint8)
-dilate = cv.dilate(thresh,kernel,iterations=2)
+opening = cv.morphologyEx(thresh, cv.MORPH_OPEN, kernel)
 
-cv.imwrite('./output.png', thresh)  # OpenCV espera BGR par salvar
+cv.imwrite('./output.png', opening)  # OpenCV espera BGR par salvar
