@@ -40,4 +40,16 @@ def process_images():
             output_path = os.path.join(output_folder, char_folder)
             proccess_image(input_path, output_path)
 
+    list_dirs = os.listdir(val_folder)
+    for diretorio in list_dirs:
+        char_folder = os.path.join(val_folder, diretorio)
+        output_char_folder = os.path.join(output_folder, char_folder)
+        os.makedirs(output_char_folder, exist_ok=True)
+
+        list_arquivos = os.listdir(char_folder)
+        for arquivo in list_arquivos:
+            input_path = os.path.join(char_folder, arquivo)
+            output_path = os.path.join(output_folder, char_folder)
+            proccess_image(input_path, output_path)
+
 process_images()
