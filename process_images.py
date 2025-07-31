@@ -1,8 +1,9 @@
 import cv2 as cv
+import time
 import os
 import numpy as np
 
-def proccess_image(img_path, output_folder):
+def process_image(img_path, output_folder):
     img = cv.imread(img_path, cv.IMREAD_GRAYSCALE)
 
     inv = cv.bitwise_not(img)
@@ -35,7 +36,9 @@ def process_images():
         for arquivo in list_arquivos:
             input_path = os.path.join(char_folder, arquivo)
             output_path = os.path.join(output_folder, char_folder)
-            proccess_image(input_path, output_path)
+            process_image(input_path, output_path)
+
+        print(f"========== Processadas imagens da pasta {char_folder} ==========")
 
     list_dirs = os.listdir(val_folder)
     for diretorio in list_dirs:
@@ -47,6 +50,17 @@ def process_images():
         for arquivo in list_arquivos:
             input_path = os.path.join(char_folder, arquivo)
             output_path = os.path.join(output_folder, char_folder)
-            proccess_image(input_path, output_path)
+            process_image(input_path, output_path)
 
-process_images()
+        print(f"========== Processadas imagens da pasta {char_folder} ==========")
+
+    print("Imagens processadas salvas na pasta output")
+
+
+if __name__ == "__main__":
+    start = time.time()
+    process_images()
+    end = time.time()
+
+    execution_time = end - start
+    print(f"Tempo de execução: {execution_time} segundos")
