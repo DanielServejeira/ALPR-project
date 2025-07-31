@@ -5,12 +5,9 @@ import numpy as np
 def proccess_image(img_path, output_folder):
     img = cv.imread(img_path, cv.IMREAD_GRAYSCALE)
 
-    img = cv.bitwise_not(img)
+    inv = cv.bitwise_not(img)
 
-    blur = cv.GaussianBlur(img, (5, 5), 0)
-    equalized = cv.equalizeHist(blur)
-
-    _, thresh = cv.threshold(img, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
+    _, thresh = cv.threshold(inv, 0, 255, cv.THRESH_BINARY + cv.THRESH_OTSU)
 
     kernel = np.ones((5, 5), np.uint8)
     opening = cv.morphologyEx(thresh, cv.MORPH_OPEN, kernel)
