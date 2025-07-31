@@ -32,7 +32,7 @@ def matriz_confusao(y_pred : np.ndarray, y_test : np.ndarray, num_classes : int)
     """
     cm = confusion_matrix(np.argmax(y_test, axis=1), np.argmax(y_pred, axis=1))
 
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(12, 8))
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
     plt.title('Matriz de Confusão')
     plt.colorbar()
@@ -41,6 +41,14 @@ def matriz_confusao(y_pred : np.ndarray, y_test : np.ndarray, num_classes : int)
     plt.yticks(tick_marks, range(num_classes))
     plt.xlabel('Predito')
     plt.ylabel('Verdadeiro')
+    thresh = cm.max() / 2.
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            plt.text(j, i, format(cm[i, j], 'd'),
+                     horizontalalignment="center",
+                     color="white" if cm[i, j] > thresh else "black")
+    
+    plt.tight_layout()
     plt.show()
 
 def metricas_classificacao(y_test : np.ndarray, y_pred : np.ndarray) -> None:

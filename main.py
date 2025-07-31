@@ -44,7 +44,7 @@ if __name__ == '__main__':
     num_classes = 35
 
     # MUDAR O CAMINHO PARA A PASTA ONDE ESTA O PROJETO
-    folder_path = "C:/Users/VitorRodrigues/Desktop/ALPR-project/"
+    folder_path = "C:/Users/VitorRodrigues/ALPR-project/"
 
     execution_time = main(img_width, img_height, channels, num_classes, folder_path)
 
