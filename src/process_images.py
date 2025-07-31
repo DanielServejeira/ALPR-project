@@ -1,9 +1,14 @@
 import cv2 as cv
-import time
 import os
 import numpy as np
 
-def process_image(img_path, output_folder):
+def process_image(img_path : str, output_folder : str) -> None:
+    """
+    Processa uma imagem para melhorar a qualidade e salvar no diretório de saída.
+    Parametros:
+    img_path: Caminho da imagem a ser processada.
+    output_folder: Pasta onde a imagem processada será salva.
+    """
     img = cv.imread(img_path, cv.IMREAD_GRAYSCALE)
 
     inv = cv.bitwise_not(img)
@@ -18,7 +23,10 @@ def process_image(img_path, output_folder):
 
     cv.imwrite(output_path, opening)
 
-def process_images():
+def process_images() -> None:
+    """
+    Processa todas as imagens nas pastas de treino e validação, salvando os resultados na pasta de saída.
+    """
     output_folder = 'output/'
     train_folder = 'train/'
     val_folder = 'val/'
@@ -55,12 +63,3 @@ def process_images():
         print(f"========== Processadas imagens da pasta {char_folder} ==========")
 
     print("Imagens processadas salvas na pasta output")
-
-
-if __name__ == "__main__":
-    start = time.time()
-    process_images()
-    end = time.time()
-
-    execution_time = end - start
-    print(f"Tempo de execução: {execution_time} segundos")
